@@ -2,19 +2,37 @@ package org.example.block_1
 
 import kotlin.math.pow
 
-fun startupIncome(){
-    //val (initialIncome, numberOfFounders, daysToFollow) = readln().split(' ').map { it.toInt() }
+fun startupIncome() {
+    val (initialIncome, numberOfFounders, daysToFollow) = readln().split(' ').map { it.toInt() }
 
-    val bigNumber = 1000000000.0.pow(100000.0)
+    val start = System.currentTimeMillis()
 
-    println(bigNumber)
+    var currentIncome = initialIncome.toString()
 
-//    repeat(daysToFollow){
-//
-//
-//        (0..9).forEach {
-//
-//        }
-//
-//    }
+    // ищем, какую цифру можно дописать
+    var nextDigit = -1
+
+    if (initialIncome % numberOfFounders != 0) {
+        (0..9).forEach {
+            val possibleIncome = currentIncome + it.toString()
+
+            if (possibleIncome.toInt() % numberOfFounders == 0) {
+                nextDigit = it
+            }
+        }
+    } else {
+        nextDigit = 0
+    }
+
+    if (nextDigit==-1){
+        currentIncome = nextDigit.toString()
+    }else{
+        currentIncome+=nextDigit
+            currentIncome+="0".repeat(daysToFollow-1)
+    }
+
+    println(currentIncome)
+
+    val end = System.currentTimeMillis()
+    println("execution time = ${end - start} ms")
 }

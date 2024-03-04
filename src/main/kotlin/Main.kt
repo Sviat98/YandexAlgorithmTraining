@@ -7,8 +7,8 @@ fun main() {
     //championsLeaguePlayOff()
     //formatFile()
     //chess()
-    //startupIncome()
-    mathProblem()
+    startupIncome()
+    //mathProblem()
     //destroyBarracks()
     //schedule()
 
