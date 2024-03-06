@@ -1,42 +1,136 @@
 package org.example.block_1
 
-fun chess(){
+fun chess() {
 
-    // B-слон, ходит под диагонали
-    // R-ладья, ходит по горизонтали и вертикали
+    val chessArray = Array(8) { CharArray(8) }
 
-    val chessArray = mutableListOf<String>()
-    var rColumn = -1
-    var rRow = -1
-    var bColumn = -1
-    var bRow = -1
-    repeat(8){
+    var numberOfCellsUnderAttack = 0
+
+    var numberOfNonEmptyCells = 0
+    repeat(8) { index ->
         val inputString = readln()
 
-        chessArray.add(inputString)
+        numberOfNonEmptyCells += inputString.filter { it == 'R' || it == 'B' }.length
+
+        chessArray[index] = inputString.toCharArray()
     }
 
-    chessArray.forEachIndexed {index, chessRow->
-        val isRowWithR = chessRow.contains('R',false)
+    for (i in chessArray.indices) {
 
-        if(isRowWithR){
-            rRow = index
-            rColumn = chessRow.indexOf('R')
+        for (j in 0 until chessArray[i].size) {
+
+            var isTopStopCell = false
+            var isBottomStopCell = false
+            var isLeftStopCell = false
+            var isRightStopCell = false
+            var isTopLeftDiagonalStopCell = false
+            var isBottomLeftDiagonalStopCell = false
+            var isTopRightDiagonalStopCell = false
+            var isBottomRightDiagonalStopCell = false
+
+            if (chessArray[i][j] == '*') {
+                var stepFromCell = 1
+
+                while (stepFromCell < 8) {
+
+                    if (i - stepFromCell >= 0 && !isTopStopCell) {
+                        val cell = chessArray[i - stepFromCell][j]
+                        if (cell != '*') {
+                            if (cell == 'R') {
+                                numberOfCellsUnderAttack++
+                                break
+                            }
+
+                            isTopStopCell = true
+                        }
+                    }
+
+                    if (i + stepFromCell < 8 && !isBottomStopCell) {
+                        val cell = chessArray[i + stepFromCell][j]
+                        if (cell != '*') {
+                            if (cell == 'R') {
+                                numberOfCellsUnderAttack++
+                                break
+                            }
+                            isBottomStopCell = true
+                        }
+                    }
+
+                    if (j - stepFromCell >= 0 && !isLeftStopCell) {
+                        val cell = chessArray[i][j - stepFromCell]
+                        if (cell != '*') {
+                            if (cell == 'R') {
+                                numberOfCellsUnderAttack++
+                                break
+                            }
+                            isLeftStopCell = true
+                        }
+                    }
+
+                    if (j + stepFromCell < 8 && !isRightStopCell) {
+                        val cell = chessArray[i][j + stepFromCell]
+                        if (cell != '*') {
+                            if (cell == 'R') {
+                                numberOfCellsUnderAttack++
+                                break
+                            }
+                            isRightStopCell = true
+                        }
+                    }
+
+                    if (i - stepFromCell >= 0 && j - stepFromCell >= 0 && !isTopLeftDiagonalStopCell) {
+                        val cell = chessArray[i - stepFromCell][j - stepFromCell]
+                        if (cell != '*') {
+                            if (cell == 'B') {
+                                numberOfCellsUnderAttack++
+                                break
+                            }
+                            isTopLeftDiagonalStopCell = true
+                        }
+                    }
+
+                    if (i + stepFromCell < 8 && j + stepFromCell < 8 && !isBottomRightDiagonalStopCell) {
+
+                        val cell = chessArray[i + stepFromCell][j + stepFromCell]
+                        if (cell != '*') {
+                            if (cell == 'B') {
+                                numberOfCellsUnderAttack++
+                                break
+                            }
+                            isBottomRightDiagonalStopCell = true
+                        }
+
+                    }
+
+                    if (i - stepFromCell >= 0 && j + stepFromCell < 8 && !isTopRightDiagonalStopCell) {
+                        val cell = chessArray[i - stepFromCell][j + stepFromCell]
+                        if (cell != '*') {
+                            if (cell == 'B') {
+                                numberOfCellsUnderAttack++
+                                break
+                            }
+                            isTopRightDiagonalStopCell = true
+                        }
+
+                    }
+
+                    if (i + stepFromCell < 8 && j - stepFromCell >= 0 && !isBottomLeftDiagonalStopCell) {
+                        val cell = chessArray[i + stepFromCell][j - stepFromCell]
+                        if (cell != '*') {
+                            if (cell == 'B') {
+                                numberOfCellsUnderAttack++
+                                break
+                            }
+                            isBottomLeftDiagonalStopCell = true
+                        }
+                    }
+
+                    stepFromCell++
+                }
+            }
         }
-
-        val isRowWithB = chessRow.contains('B',false)
-
-        if(isRowWithB){
-            bRow = index
-            bColumn = chessRow.indexOf('B')
-        }
-
     }
+    val nonAttackingCells = 64 - numberOfCellsUnderAttack - numberOfNonEmptyCells
 
-    println("R in $rRow $rColumn")
-
-    println("B in $bRow $bColumn")
-
-
-    println(chessArray)
+    println(nonAttackingCells)
 }
