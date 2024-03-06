@@ -1,4 +1,4 @@
-package org.example.block_1
+package org.example.season_5.block_1
 
 fun chess() {
 
