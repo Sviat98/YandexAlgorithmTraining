@@ -12,33 +12,33 @@ fun noMoreNoLess() {
 
         var currentSublistLength = 0
 
-        var possibleSublistLength = 0
-
+        var possibleSublistLength = testDataList[0]
 
         testDataList.forEachIndexed { index, item ->
 
-            if (item < possibleSublistLength || possibleSublistLength == 0) {
+            if (item < possibleSublistLength) {
                 possibleSublistLength = item
             }
 
-//            subListLengthToAdd = currentSublistLength
-
             currentSublistLength++
 
-            if (currentSublistLength == possibleSublistLength || item < currentSublistLength || index == testDataList.size - 1) {
+            when {
+                (index != testDataList.size - 1) -> {
+                    val nextItem = testDataList[index + 1]
 
-                val subListLengthToAdd =
-                    if (item < currentSublistLength) currentSublistLength - 1 else currentSublistLength
-                sublistSizes.add(subListLengthToAdd)
-                possibleSublistLength = 0
-                currentSublistLength = 0
+                    if (nextItem <= currentSublistLength || currentSublistLength == possibleSublistLength) {
+                        sublistSizes.add(currentSublistLength)
+                        possibleSublistLength = nextItem
+                        currentSublistLength = 0
+                    }
+                }
+                else -> {
+                    sublistSizes.add(currentSublistLength)
+                }
             }
-
-
         }
 
         println(sublistSizes.size)
         println(sublistSizes.joinToString(" "))
-
     }
 }
