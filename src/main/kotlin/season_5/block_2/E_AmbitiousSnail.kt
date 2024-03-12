@@ -7,6 +7,8 @@ fun ambitiousSnail() {
 
     val berries = mutableListOf<Triple<Int, Int, Int>>()
 
+    var maxHeight = 0L
+
     repeat(numberOfBerries) {
         val berryParams = readln().split(' ').map { it.toInt() }
 
@@ -21,26 +23,28 @@ fun ambitiousSnail() {
         berries.add(berry)
     }
 
+    val sortedPositiveBerries =
+        berries.filter { it.second >= 0 }
+            .sortedWith(compareByDescending<Triple<Int, Int, Int>> { it.second }.thenByDescending { it.third })
 
+    val sortedNegativeBerries =
+        berries.filter { it.second < 0 }.sortedWith(compareByDescending<Triple<Int, Int, Int>> { it.third })
 
-    berries.sortByDescending { it.second }
+    val sortedBerries = sortedPositiveBerries + sortedNegativeBerries
 
+    println(sortedBerries)
 
-    val berriesWithPositiveStrength = berries.filter { it.second > 0 }
+    sortedBerries.forEachIndexed { index, berry ->
+        val maxHeightForBerry = sortedBerries.take(index).sumOf { it.second.toLong() } + berry.third
 
-    println("berries = $berries")
+//        println("number = ${berry.first} index = $index sumBefore = ${sortedBerries.take(index).sumOf { it.second }} boost = ${berry.third} maxHeightForBerry = $maxHeightForBerry")
 
-
-    val extraHeight = if (berriesWithPositiveStrength.lastIndex < berries.size - 1)
-        berries[berriesWithPositiveStrength.lastIndex + 1].third else 0
-
-    println("extraHeight = $extraHeight")
-
-
-    val maxHeight = berriesWithPositiveStrength.sumOf { it.second } + extraHeight
+        if (maxHeightForBerry > maxHeight) {
+            maxHeight = maxHeightForBerry
+        }
+    }
 
     println(maxHeight)
 
-    println(berries.map { it.first }.joinToString(" "))
-
+    println(sortedBerries.map { it.first }.joinToString(" "))
 }
