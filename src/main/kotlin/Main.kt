@@ -1,5 +1,6 @@
 package org.example
 
+import ambitiousSnail
 import org.example.season_1.block_1.ambulance
 import org.example.season_1.block_1.sqrt_equation
 import org.example.season_1.block_1.triangle
@@ -22,7 +23,7 @@ fun main() {
     //rectangle()
     //fishPrice()
     //rope()
-    perimeter()
-    //ambitiousSnail()
+    //perimeter()
+    ambitiousSnail()
     //noMoreNoLess()
 }

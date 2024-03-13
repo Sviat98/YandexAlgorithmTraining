@@ -1,15 +1,14 @@
-package org.example.season_5.block_2
-
-import kotlin.math.max
+import java.util.*
 
 fun ambitiousSnail() {
     val numberOfBerries = readln().toInt()
 
     val berries = mutableListOf<Triple<Int, Int, Int>>()
 
-    var maxHeight = 0L
+    var lastPositiveBerryIndex = -1
 
     repeat(numberOfBerries) {
+
         val berryParams = readln().split(' ').map { it.toInt() }
 
         val berryStrength = berryParams[0] - berryParams[1]
@@ -23,28 +22,47 @@ fun ambitiousSnail() {
         berries.add(berry)
     }
 
-    val sortedPositiveBerries =
-        berries.filter { it.second >= 0 }
-            .sortedWith(compareByDescending<Triple<Int, Int, Int>> { it.second }.thenByDescending { it.third })
+    val (positiveBerries, negativeBerries) = berries.partition { it.second > 0 }
 
-    val sortedNegativeBerries =
-        berries.filter { it.second < 0 }.sortedWith(compareByDescending<Triple<Int, Int, Int>> { it.third })
+    if (negativeBerries.isNotEmpty()) {
 
-    val sortedBerries = sortedPositiveBerries + sortedNegativeBerries
+        val maxHeightForBerry = negativeBerries.maxBy { it.third }.third
 
-    println(sortedBerries)
+        val berryToReachMaxHeight = negativeBerries.filter { it.third == maxHeightForBerry }.minBy { it.second }
 
-    sortedBerries.forEachIndexed { index, berry ->
-        val maxHeightForBerry = sortedBerries.take(index).sumOf { it.second.toLong() } + berry.third
+        val berryToReachMaxHeightIndex = negativeBerries.indexOf(berryToReachMaxHeight)
 
-//        println("number = ${berry.first} index = $index sumBefore = ${sortedBerries.take(index).sumOf { it.second }} boost = ${berry.third} maxHeightForBerry = $maxHeightForBerry")
+        Collections.swap(negativeBerries, 0, berryToReachMaxHeightIndex)
+    }
 
-        if (maxHeightForBerry > maxHeight) {
-            maxHeight = maxHeightForBerry
+    var maxHeight = 0L
+
+    val positiveBerrySum = positiveBerries.sumOf { it.second.toLong() }
+
+    positiveBerries.forEachIndexed { index, berry ->
+        val maxHeightIfLast = positiveBerrySum - berry.second + berry.third
+
+        if (maxHeightIfLast > maxHeight) {
+            maxHeight = maxHeightIfLast
+            lastPositiveBerryIndex = index
         }
     }
 
-    println(maxHeight)
+    if (lastPositiveBerryIndex != -1) {
+        Collections.swap(positiveBerries, lastPositiveBerryIndex, positiveBerries.size - 1)
+    }
 
+    if (negativeBerries.isNotEmpty()) {
+        val maxHeightWithFirstNegative = positiveBerries.sumOf { it.second.toLong() } + negativeBerries[0].third
+
+        if (maxHeightWithFirstNegative > maxHeight) {
+            maxHeight = maxHeightWithFirstNegative
+        }
+    }
+
+    val sortedBerries = positiveBerries + negativeBerries
+
+
+    println(maxHeight)
     println(sortedBerries.map { it.first }.joinToString(" "))
 }
