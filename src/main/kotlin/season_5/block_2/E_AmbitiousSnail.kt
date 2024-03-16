@@ -53,7 +53,7 @@ fun ambitiousSnail() {
     }
 
     if (negativeBerries.isNotEmpty()) {
-        val maxHeightWithFirstNegative = positiveBerries.sumOf { it.second.toLong() } + negativeBerries[0].third
+        val maxHeightWithFirstNegative = positiveBerrySum + negativeBerries[0].third
 
         if (maxHeightWithFirstNegative > maxHeight) {
             maxHeight = maxHeightWithFirstNegative

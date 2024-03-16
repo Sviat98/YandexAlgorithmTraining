@@ -5,6 +5,7 @@ import org.example.season_1.block_1.ambulance
 import org.example.season_1.block_1.sqrt_equation
 import org.example.season_1.block_1.triangle
 import org.example.season_5.block_2.*
+import org.example.season_5.block_3.*
 
 fun main() {
     //paintTree()
@@ -24,6 +25,14 @@ fun main() {
     //fishPrice()
     //rope()
     //perimeter()
-    ambitiousSnail()
+    //ambitiousSnail()
     //noMoreNoLess()
+    //warships()
+
+    //playlist()
+    //anagram()
+    //deleteNumbers()
+    repeatableNumber()
+    //twoOutOfThree()
+    //replaceWords()
 }
