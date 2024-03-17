@@ -9,23 +9,27 @@ fun repeatableNumber() {
 
     var answer = "NO"
 
-    val repeatedNumbersMap = numbers.groupingBy { it }.eachCount().filterValues { it > 1 }
+    val numbersMap = mutableMapOf<Int,MutableSet<Int>>()
 
-    println(repeatedNumbersMap)
+    numbers.forEachIndexed { index, number ->
 
-    val timeBeforeHandlingMap = System.currentTimeMillis()
+        var indexList = numbersMap[number]
 
-    println(repeatedNumbersMap)
+        if(indexList==null){
+            indexList = mutableSetOf()
+            numbersMap[number] = indexList
+        }
 
-    println("Time Before Handling Map is ${timeBeforeHandlingMap-begin} ms")
+        indexList.add(index)
+    }
 
-    repeatedNumbersMap.forEach { entry ->
-        val indexList = numbers.mapIndexed { index, i -> Pair(i, index) }.filter { it.first == entry.key }.map { it.second }.sorted()
+    numbersMap.forEach { entry ->
+        val indexList = entry.value
 
-        var minDiff = 10000
+        var minDiff = 100000
 
         for (i in 0 until indexList.size - 1) {
-            val possibleMin = indexList[i + 1] - indexList[i]
+            val possibleMin = indexList.elementAt(i+1) - indexList.elementAt(i)
 
             if (possibleMin < minDiff) {
                 minDiff = possibleMin
