@@ -29,10 +29,10 @@ fun main() {
     //noMoreNoLess()
     //warships()
 
-    //playlist()
+    playlist()
     //anagram()
     //deleteNumbers()
-    repeatableNumber()
+    //repeatableNumber()
     //twoOutOfThree()
     //replaceWords()
 }
