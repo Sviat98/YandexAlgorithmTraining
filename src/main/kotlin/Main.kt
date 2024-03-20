@@ -26,7 +26,7 @@ fun main() {
     //rope()
     //perimeter()
     //ambitiousSnail()
-    fortuneWheel()
+    //fortuneWheel()
     //noMoreNoLess()
     //warships()
 
@@ -36,4 +36,5 @@ fun main() {
     //repeatableNumber()
     //twoOutOfThree()
     //replaceWords()
+    football()
 }
