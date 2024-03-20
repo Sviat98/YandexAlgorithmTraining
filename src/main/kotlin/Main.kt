@@ -26,10 +26,11 @@ fun main() {
     //rope()
     //perimeter()
     //ambitiousSnail()
+    fortuneWheel()
     //noMoreNoLess()
     //warships()
 
-    playlist()
+    //playlist()
     //anagram()
     //deleteNumbers()
     //repeatableNumber()
