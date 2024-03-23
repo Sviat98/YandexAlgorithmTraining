@@ -6,6 +6,7 @@ import org.example.season_1.block_1.sqrt_equation
 import org.example.season_1.block_1.triangle
 import org.example.season_5.block_2.*
 import org.example.season_5.block_3.*
+import org.example.season_5.block_4.arraySearch
 
 fun main() {
     //paintTree()
@@ -36,5 +37,7 @@ fun main() {
     //repeatableNumber()
     //twoOutOfThree()
     //replaceWords()
-    football()
+    //football()
+
+    arraySearch()
 }
