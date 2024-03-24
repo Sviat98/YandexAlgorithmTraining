@@ -7,6 +7,7 @@ import org.example.season_1.block_1.triangle
 import org.example.season_5.block_2.*
 import org.example.season_5.block_3.*
 import org.example.season_5.block_4.arraySearch
+import org.example.season_5.block_4.lineWarships
 
 fun main() {
     //paintTree()
@@ -39,5 +40,6 @@ fun main() {
     //replaceWords()
     //football()
 
-    arraySearch()
+    //arraySearch()
+    lineWarships()
 }
