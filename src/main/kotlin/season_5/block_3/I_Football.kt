@@ -9,15 +9,13 @@ fun football() {
 
     val teamRegex = Regex("\"([A-Z]|[a-z]|\\s)+\"")
 
-    var output = ""
+    val output = mutableListOf<String>()
 
     val scoreRegex = Regex("(\\d){1,2}:(\\d){1,2}")
 
     val scorerRegex = Regex("([A-Z]|[a-z]|\\s)+")
 
     val scoreMinuteRegex = Regex("(\\d){1,2}")
-
-    val goalRegex = Regex("$scoreRegex\\s$scoreMinuteRegex'")
 
     val teamsMap = mutableMapOf<String, Pair<Int, MutableSet<String>>>()
 
@@ -126,8 +124,7 @@ fun football() {
 
                     totalTeamGoals += scoringMinutesCount
                 }
-                //println(totalTeamGoals)
-                output+=totalTeamGoals.toString()+"\r\n"
+                output.add(totalTeamGoals.toString())
             }
 
             footballInfo.startsWith("Total goals by") -> {
@@ -135,9 +132,7 @@ fun football() {
 
                 val playerTotalGoals = teamsMap[player]?.second?.size ?: 0
 
-               // println(playerTotalGoals)
-                output+=playerTotalGoals.toString()+"\r\n"
-
+                output.add(playerTotalGoals.toString())
             }
             footballInfo.startsWith("Mean goals per game for") -> {
                 val team = teamRegex.find(footballInfo)!!.value.trim().drop(1).dropLast(1)
@@ -156,9 +151,7 @@ fun football() {
 
                 val teamGoalsPerGame = (totalTeamGoals / teamTotalMatches).toDouble()
 
-                //println(teamGoalsPerGame)
-                output+=teamGoalsPerGame.toString()+"\r\n"
-
+                output.add(teamGoalsPerGame.toString())
             }
             footballInfo.startsWith("Mean goals per game by") -> {
                 val player = footballInfo.substring(23, footballInfo.length)
@@ -171,8 +164,7 @@ fun football() {
                 val playerGoalsPerGame =
                     if (totalPlayerMatches == 0) 0.0 else playerTotalGoals.toDouble() / totalPlayerMatches
 
-                //println(playerGoalsPerGame)
-                output+=playerGoalsPerGame.toString()+"\r\n"
+                output.add(playerGoalsPerGame.toString())
             }
 
             footballInfo.matches(Regex("Goals on minute $scoreMinuteRegex by $scorerRegex")) -> {
@@ -182,9 +174,7 @@ fun football() {
 
                 val goalsOnThatMinuteScored = playersMap[scorer]?.second?.filter { it == scoringMinute }?.size ?: 0
 
-                //println(goalsOnThatMinuteScored)
-                output+=goalsOnThatMinuteScored.toString()+"\r\n"
-
+                output.add(goalsOnThatMinuteScored.toString())
             }
 
             footballInfo.matches(Regex("Goals on first $scoreMinuteRegex minutes by $scorerRegex")) -> {
@@ -194,8 +184,7 @@ fun football() {
 
                 val goalsOnFirstMinutesScored = playersMap[scorer]?.second?.filter { it <= scoringMinute }?.size ?: 0
 
-                //println(goalsOnFirstMinutesScored)
-                output+=goalsOnFirstMinutesScored.toString()+"\r\n"
+                output.add(goalsOnFirstMinutesScored.toString())
             }
 
             footballInfo.matches(Regex("Goals on last $scoreMinuteRegex minutes by $scorerRegex")) -> {
@@ -205,8 +194,7 @@ fun football() {
 
                 val goalsOnLastMinutesScored = playersMap[scorer]?.second?.filter { it >= scoringMinute }?.size ?: 0
 
-                //println(goalsOnLastMinutesScored)
-                output+=goalsOnLastMinutesScored.toString()+"\r\n"
+                output.add(goalsOnLastMinutesScored.toString())
             }
 
             footballInfo.startsWith("Score opens by") -> {
@@ -228,16 +216,13 @@ fun football() {
 
                     scoreOpenAmount = playersMap[scorer]?.first ?: 0
                 }
-                //println(scoreOpenAmount)
-                output+=scoreOpenAmount.toString()+"\r\n"
+                output.add(scoreOpenAmount.toString())
             }
             else -> Unit
         }
     }
 
     val outputStream = BufferedWriter(FileWriter("output.txt"))
-    outputStream.write(output)
+    outputStream.write(output.joinToString("\n"))
     outputStream.flush()
-
-    //File("output.txt").writeText(output)
 }
