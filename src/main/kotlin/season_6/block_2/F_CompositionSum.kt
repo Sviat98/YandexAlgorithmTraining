@@ -19,42 +19,19 @@ fun compositionSum() {
 
     var result = 0.toBigInteger()
 
-    if (numbers.size == 3) {
-        result = (numbers[0] * numbers[1] * numbers[2]).mod(MODULE)
-    } else {
-        var prefixSum = 0.toBigInteger()
+    var prefixSum = numbers[0]
 
-        val prefixSums = mutableListOf(0.toBigInteger())
+    var suffixSum = numbers.sumOf { it } - numbers[0] - numbers[1]
 
-        numbers.forEach { number ->
-            prefixSum += number
-
-            prefixSums.add(prefixSum)
-        }
-
-        val prefixSumsLeftIndex = 2
-        val prefixSumsRightIndex = numbers.size
-
-        val mostRightIndex = numbers.size-1
-        val leftEdge = (numbers[0]*numbers[1]*(prefixSums[prefixSumsRightIndex]-prefixSums[prefixSumsLeftIndex])).mod(MODULE)
-
-        val rightEdge = (numbers[mostRightIndex]*numbers[mostRightIndex-1]* prefixSums[prefixSumsRightIndex-2]).mod(MODULE)
-
-        var middle = 0.toBigInteger()
-
-        if (mostRightIndex>3){
-            for (i in 2..mostRightIndex-2){
-               middle+=(numbers[i]*(prefixSums[i])*(prefixSums[prefixSumsRightIndex]-prefixSums[i+1])).mod(MODULE)
-                }
-            }
-
-           result = (leftEdge+rightEdge+middle).mod(MODULE)
+    for (i in 1..numbers.size - 2) {
+        result += (numbers[i] * prefixSum * suffixSum).mod(MODULE)
+        prefixSum += (numbers[i]).mod(MODULE)
+        suffixSum -= numbers[i + 1].mod(MODULE)
     }
 
-    println(result)
+    println(result.mod(MODULE))
 
     val end = System.currentTimeMillis()
 
     print("Total time ${end - start} ms")
-
 }

@@ -1,5 +1,12 @@
 package org.example
 
+import org.example.advent2025.day1.countZerosOnDial_1
+import org.example.advent2025.day1.countZerosOnDial_2
+import org.example.leetcode.addBinary
+import org.example.leetcode.integerToRoman
+import org.example.leetcode.isHappy
+import org.example.leetcode.plusOne
+import org.example.leetcode.romanToInt
 import org.example.season_6.block_2.compositionSum
 import java.io.BufferedWriter
 import java.io.File
@@ -25,6 +32,13 @@ import org.example.season_6.block_2.prefixSum
 import org.example.season_6.block_2.removeMiddle
 import org.example.season_6.block_2.removeMiddleNew
 import org.example.season_6.block_2.toDoList
+import org.example.season_6.block_3.deliveryPoint
+import org.example.season_6.block_3.lineLand
+import org.example.season_6.block_3.minimalRightBracketSequence
+import org.example.season_6.block_3.minimumInWindow
+import org.example.season_6.block_3.postfixRecord
+import org.example.season_6.block_3.rightBracketSequence
+import org.example.season_6.block_3.stackSum
 
 fun main() {
     //paintTree()
@@ -72,9 +86,34 @@ fun main() {
     //toDoList()
     //removeMiddle()
     //removeMiddleNew()
-    compositionSum()
+    //compositionSum()
+
+    //rightBracketSequence()
+    //lineLand()
+    //minimumInWindow()
+    //postfixRecord()
+    //minimalRightBracketSequence()
+    //deliveryPoint()
+    //stackSum()
 
     //readFromConsole()
+
+//    val testStrings = listOf(Pair("1010","1011"),Pair("11","1"),
+//        Pair("1111111111111111","11111"))
+
+//    val testNumbers = listOf(3749,1994,58)
+//
+//    testNumbers.forEach { testNumber ->
+//        println(integerToRoman(testNumber))
+//    }
+//
+//    val testRomanNumbers = listOf("III","LVIII","MCMXCIV")
+//
+//    testRomanNumbers.forEach { testRomanNumber ->
+//        println(romanToInt(testRomanNumber))
+//    }
+
+    println(countZerosOnDial_2())
 }
 
 fun generateHugeString(){
