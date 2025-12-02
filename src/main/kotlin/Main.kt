@@ -1,16 +1,7 @@
 package org.example
 
-import org.example.advent2025.day1.countZerosOnDial_1
-import org.example.advent2025.day1.countZerosOnDial_2
-import org.example.leetcode.addBinary
-import org.example.leetcode.integerToRoman
-import org.example.leetcode.isHappy
-import org.example.leetcode.plusOne
-import org.example.leetcode.romanToInt
-import org.example.season_6.block_2.compositionSum
-import java.io.BufferedWriter
-import java.io.File
-import java.io.FileWriter
+import org.example.advent2025.day2.findInvalidIds_1
+import org.example.advent2025.day2.findInvalidIds_2
 
 //import ambitiousSnail
 //import org.example.season_1.block_1.ambulance
@@ -25,20 +16,7 @@ import java.io.FileWriter
 //import org.example.season_6.block_1.raftAndSwimmer
 //import org.example.season_6.block_1.socksAndTShirts
 //import org.example.season_6.block_2.luckyNumber
-import org.example.season_6.block_2.monuments
 import kotlin.random.Random
-
-import org.example.season_6.block_2.prefixSum
-import org.example.season_6.block_2.removeMiddle
-import org.example.season_6.block_2.removeMiddleNew
-import org.example.season_6.block_2.toDoList
-import org.example.season_6.block_3.deliveryPoint
-import org.example.season_6.block_3.lineLand
-import org.example.season_6.block_3.minimalRightBracketSequence
-import org.example.season_6.block_3.minimumInWindow
-import org.example.season_6.block_3.postfixRecord
-import org.example.season_6.block_3.rightBracketSequence
-import org.example.season_6.block_3.stackSum
 
 fun main() {
     //paintTree()
@@ -113,7 +91,7 @@ fun main() {
 //        println(romanToInt(testRomanNumber))
 //    }
 
-    println(countZerosOnDial_2())
+    println(findInvalidIds_2())
 }
 
 fun generateHugeString(){
