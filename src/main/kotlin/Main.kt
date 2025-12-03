@@ -3,6 +3,7 @@ package org.example
 import org.example.advent2025.day2.findInvalidIds_1
 import org.example.advent2025.day2.findInvalidIds_2
 import org.example.advent2025.day3.findJoltage_1
+import org.example.advent2025.day3.findJoltage_2
 
 //import ambitiousSnail
 //import org.example.season_1.block_1.ambulance
@@ -92,7 +93,7 @@ fun main() {
 //        println(romanToInt(testRomanNumber))
 //    }
 
-    println(findJoltage_1())
+    println(findJoltage_2())
 }
 
 fun generateHugeString(){
