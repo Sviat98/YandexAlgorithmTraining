@@ -6,6 +6,8 @@ import org.example.advent2025.day3.findJoltage_1
 import org.example.advent2025.day3.findJoltage_2
 import org.example.advent2025.day4.countPaperRolls_1
 import org.example.advent2025.day4.countPaperRolls_2
+import org.example.advent2025.day5.findFreshIngredients_1
+import org.example.advent2025.day5.findFreshIngredients_2
 
 //import ambitiousSnail
 //import org.example.season_1.block_1.ambulance
@@ -95,7 +97,7 @@ fun main() {
 //        println(romanToInt(testRomanNumber))
 //    }
 
-    println(countPaperRolls_2())
+    println(findFreshIngredients_2())
 }
 
 fun generateHugeString(){
